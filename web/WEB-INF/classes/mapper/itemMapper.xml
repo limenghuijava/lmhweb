@@ -14,4 +14,25 @@
     <select id="queryAllItems" resultMap="resultList">
         select id,name,price,detail,pic,createtime from items
     </select>
+
+    <select id="queryItemListById" resultMap="resultList">
+        select id,name,price,detail,pic,createtime from items
+        <where>
+              id=#{id}
+        </where>
+    </select>
+
+    <update id="editItem" parameterType="cn.lmhweb.springmvc.module.Item">
+        update items SET
+        <if test="name !='' and name !=null">
+          name=#{name},
+        </if>
+        <if test="price !='' and price !=null">
+            price=#{price},
+        </if>
+        <if test="detail !='' and detail !=null">
+            detail =#{detail},
+        </if>
+        where id=#{id}
+    </update>
 </mapper>

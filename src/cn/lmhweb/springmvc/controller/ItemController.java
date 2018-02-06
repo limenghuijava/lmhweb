@@ -2,8 +2,10 @@ package cn.lmhweb.springmvc.controller;
 
 import cn.lmhweb.springmvc.module.Item;
 import cn.lmhweb.ssm.service.ItemService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,5 +37,26 @@ public class ItemController {
 
         return modelAndView;
     }
+
+
+    @RequestMapping("/editItem.action")
+    public String queryItemListById(String id,Model model) {
+        //id从页面中传入的参数，如果没有的话，传入的值是默认值null
+        if(Strings.isNotBlank(id)){
+            Item item=itemService.queryItemListById(id);
+            model.addAttribute("item",item);
+        }
+        return "editItem";//返回页面的名称，结合配置的师徒解析器可以成功的找到相应的文件
+    }
+
+    @RequestMapping("/editItemSubmit.action")
+    public String editItem(Item item) {
+        System.out.println("hdkjskfdlkgkdfnkglflff");
+        System.out.println(item);
+        //id从页面中传入的参数，如果没有的话，传入的值是默认值null
+            itemService.editItem(item);
+            return "itemsList";
+    }
+
 
 }

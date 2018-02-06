@@ -23,4 +23,16 @@ public class ItemServiceImpl implements ItemService{
         return list;
 
     }
+
+    @Override
+    public Item queryItemListById(String id){
+
+        // 从数据库查询商品数据
+        return itemMapper.queryItemListById(id);
+    }
+
+    @Override
+    public void editItem(Item item){
+        itemMapper.editItem(item);
+    }
 }
