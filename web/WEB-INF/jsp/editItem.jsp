@@ -10,7 +10,7 @@
 
 </head>
 <body> 
-<form id="itemForm" action="${pageContext.request.contextPath }/item/editItemSubmit.action" method="post" >
+<form id="itemForm" action="${pageContext.request.contextPath }/item/updateItem.action" method="post" >
 <input type="hidden" name="id" value="${item.id }"/>
 修改商品信息：
 <table width="100%" border=1>

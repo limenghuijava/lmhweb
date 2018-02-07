@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class ItemController {
     private ItemService itemService;
 
     @RequestMapping("/queryItem.action")
-    public ModelAndView queryItemList() {
+    public ModelAndView queryItemList(Item item) {
+        System.out.println(item);
         // 创建页面需要显示的商品数据
         List<Item> list = itemService.queryAllItems();
 
@@ -49,14 +51,16 @@ public class ItemController {
         return "editItem";//返回页面的名称，结合配置的师徒解析器可以成功的找到相应的文件
     }
 
-    @RequestMapping("/editItemSubmit.action")
+    @RequestMapping(value="/updateItem.action",method= RequestMethod.POST)
     public String editItem(Item item) {
-        System.out.println("hdkjskfdlkgkdfnkglflff");
-        System.out.println(item);
         //id从页面中传入的参数，如果没有的话，传入的值是默认值null
             itemService.editItem(item);
-            return "itemsList";
+            //更新完成之后，重定向到queryItem.action方法中
+//       return "redirect:/item/queryItem.action";
+        //转发到请求的方法中
+        return "forward:/item/queryItem.action";
     }
+
 
 
 }

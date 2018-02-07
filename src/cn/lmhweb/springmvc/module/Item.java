@@ -1,5 +1,6 @@
 package cn.lmhweb.springmvc.module;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Item {
@@ -61,6 +62,29 @@ public class Item {
     private Double price;
     private Date createtime;
     private String detail;
+
+    public String[] getIds() {
+        return ids;
+    }
+
+    public void setIds(String[] ids) {
+        this.ids = ids;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", createtime=" + createtime +
+                ", detail='" + detail + '\'' +
+                ", ids=" + Arrays.toString(ids) +
+                ", pic='" + pic + '\'' +
+                '}';
+    }
+
+    private String[] ids;
 
     public String getPic() {
         return pic;

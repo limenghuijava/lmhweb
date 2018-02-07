@@ -31,7 +31,7 @@
             price=#{price},
         </if>
         <if test="detail !='' and detail !=null">
-            detail =#{detail},
+            detail =#{detail}
         </if>
         where id=#{id}
     </update>

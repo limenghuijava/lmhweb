@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!--自动加载RequestMappingHandlerMapping处理器映射器和RequestMappingHandlerAdapter处理器适配器-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
 
     <!-- 配置controller扫描包 -->
     <context:component-scan base-package="cn.lmhweb.springmvc.controller" />
@@ -21,6 +21,25 @@
         <property name="suffix" value=".jsp" />
         <!--最终jsp物理地址：前缀+逻辑视图名+后缀-->
     </bean>
+
+    <!-- 转换器配置 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="cn.lmhweb.ssm.utils.DateConverter" />
+            </set>
+        </property>
+    </bean>
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 所有的请求都进入拦截器 -->
+            <mvc:mapping path="/**" />
+            <!-- 配置具体的拦截器 -->
+            <bean class="cn.lmhweb.ssm.utils.MyHandlerInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>
